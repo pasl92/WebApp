@@ -7,14 +7,14 @@ var CalculateApp1 = /** @class */ (function () {
         this.watchInputValues();
     };
     CalculateApp1.prototype.getInputs = function () {
-        this.userInput1 = document.querySelector('#input1');
-        this.userInput2 = document.querySelector('#input2');
-        this.userInput3 = document.querySelector('#input3');
-        this.userInput4 = document.querySelector('#input4');
+        this.userInput1 = document.querySelector('#data1');
+        this.userInput2 = document.querySelector('#data2');
+        this.userInput3 = document.querySelector('#data3');
+        this.userInput4 = document.querySelector('#data4');
         this.sumOutput = document.querySelector('#sum');
-        this.averageOutput = document.querySelector('#average');
-        this.minimumOutput = document.querySelector('#minimum');
-        this.maximumOutput = document.querySelector('#maximum');
+        this.averageOutput = document.querySelector('#avg');
+        this.minimumOutput = document.querySelector('#min');
+        this.maximumOutput = document.querySelector('#max');
     };
     CalculateApp1.prototype.watchInputValues = function () {
         var _this = this;
@@ -29,16 +29,16 @@ var CalculateApp1 = /** @class */ (function () {
         var value3 = +this.userInput3.value;
         var value4 = +this.userInput4.value;
         var sum = value1 + value2 + value3 + value4;
-        var average = sum / 4;
-        var minimum = Math.min(value1, value2, value3, value4);
-        var maximum = Math.max(value1, value2, value3, value4);
-        this.showValues(sum, average, minimum, maximum);
+        var avg = sum / 4;
+        var min = Math.min(value1, value2, value3, value4);
+        var max = Math.max(value1, value2, value3, value4);
+        this.showValues(sum, avg, min, max);
     };
-    CalculateApp1.prototype.showValues = function (sum, average, minimum, maximum) {
+    CalculateApp1.prototype.showValues = function (sum, avg, min, max) {
         this.sumOutput.value = sum.toString();
-        this.averageOutput.value = average.toString();
-        this.minimumOutput.value = minimum.toString();
-        this.maximumOutput.value = maximum.toString();
+        this.averageOutput.value = avg.toString();
+        this.minimumOutput.value = min.toString();
+        this.maximumOutput.value = max.toString();
     };
     return CalculateApp1;
 }());

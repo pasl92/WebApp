@@ -23,14 +23,14 @@ class CalculateApp1
 
     getInputs()
     {
-        this.userInput1 = document.querySelector('#input1');
-        this.userInput2 = document.querySelector('#input2');
-        this.userInput3 = document.querySelector('#input3');
-        this.userInput4 = document.querySelector('#input4');
+        this.userInput1 = document.querySelector('#data1');
+        this.userInput2 = document.querySelector('#data2');
+        this.userInput3 = document.querySelector('#data3');
+        this.userInput4 = document.querySelector('#data4');
         this.sumOutput = document.querySelector('#sum');
-        this.averageOutput = document.querySelector('#average');
-        this.minimumOutput = document.querySelector('#minimum');
-        this.maximumOutput = document.querySelector('#maximum');
+        this.averageOutput = document.querySelector('#avg');
+        this.minimumOutput = document.querySelector('#min');
+        this.maximumOutput = document.querySelector('#max');
     }
 
     watchInputValues()
@@ -49,19 +49,19 @@ class CalculateApp1
         const value4 = +this.userInput4.value;  
 
         const sum = value1 + value2 + value3 + value4;
-        const average = sum / 4;
-        const minimum = Math.min(value1, value2, value3, value4);
-        const maximum = Math.max(value1, value2, value3, value4);
+        const avg = sum / 4;
+        const min = Math.min(value1, value2, value3, value4);
+        const max = Math.max(value1, value2, value3, value4);
 
-        this.showValues(sum, average, minimum, maximum);
+        this.showValues(sum, avg, min, max);
     }
 
-    showValues(sum: number, average: number, minimum: number, maximum: number)
+    showValues(sum: number, avg: number, min: number, max: number)
     {
         this.sumOutput.value = sum.toString();
-        this.averageOutput.value = average.toString();
-        this.minimumOutput.value = minimum.toString();
-        this.maximumOutput.value = maximum.toString();
+        this.averageOutput.value = avg.toString();
+        this.minimumOutput.value = min.toString();
+        this.maximumOutput.value = max.toString();
 
          
     }

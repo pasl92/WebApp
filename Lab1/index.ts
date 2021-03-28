@@ -1,69 +1,151 @@
-class CalculateApp1
+class App1
 {
-    userInput1: HTMLInputElement;
-    userInput2: HTMLInputElement;
-    userInput3: HTMLInputElement;
-    userInput4: HTMLInputElement;
-
+    //pobierami div z html
+    codo: HTMLDivElement = <HTMLDivElement>document.getElementById('container')
+    obliczenia: HTMLDivElement = <HTMLDivElement>document.getElementById('statsData')
+    zmienna: HTMLInputElement = <HTMLInputElement>document.getElementById('member')
+    addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add')
+    deleteButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('delete')
     sumOutput: HTMLInputElement;
     averageOutput: HTMLInputElement;
     minimumOutput: HTMLInputElement;
     maximumOutput: HTMLInputElement;
+    
+
+    
+    //Tablica inputow do obliczen - tablica
+    numbersArray: number[] = [];
+
 
     constructor()
     {
-        this.openApplication();
-    }
-
-    openApplication()
-    {
-        this.getInputs();
-        this.watchInputValues();
+        this.getInputs()
+        //Tablica inputow do obliczen
+        this.createInput();
+        this.showSum();
+        this.showAvg();
+        this.showMin();
+        this.showMax();
     }
 
     getInputs()
     {
-        this.userInput1 = document.querySelector('#data1');
-        this.userInput2 = document.querySelector('#data2');
-        this.userInput3 = document.querySelector('#data3');
-        this.userInput4 = document.querySelector('#data4');
         this.sumOutput = document.querySelector('#sum');
         this.averageOutput = document.querySelector('#avg');
         this.minimumOutput = document.querySelector('#min');
         this.maximumOutput = document.querySelector('#max');
     }
 
-    watchInputValues()
+    createInput()
     {
-        this.userInput1.addEventListener('input', () => this.computeData());
-        this.userInput2.addEventListener('input', () => this.computeData());
-        this.userInput3.addEventListener('input', () => this.computeData());
-        this.userInput4.addEventListener('input', () => this.computeData());
-    }   
+        //obsługa triggerowania inputow
+        this.zmienna.addEventListener("input", () => 
+        {
+            //input ile bedzie inputow do obliczen
+            const inputValue : number = +this.zmienna.value;
+            this.codo.innerHTML = '';
 
-    computeData()
-    {
-        const value1 = +this.userInput1.value;
-        const value2 = +this.userInput2.value;
-        const value3 = +this.userInput3.value;
-        const value4 = +this.userInput4.value;  
-
-        const sum = value1 + value2 + value3 + value4;
-        const avg = sum / 4;
-        const min = Math.min(value1, value2, value3, value4);
-        const max = Math.max(value1, value2, value3, value4);
-
-        this.showValues(sum, avg, min, max);
+            for (let i = 0; i < inputValue; i++)
+            {
+                var newForm = document.createElement('input');
+                newForm.type = 'number'
+                newForm.id = "form"+i
+                newForm.value = '0';
+                this.codo.appendChild(newForm);
+            }
+        });
     }
 
-    showValues(sum: number, avg: number, min: number, max: number)
+    getValues()
     {
-        this.sumOutput.value = sum.toString();
-        this.averageOutput.value = avg.toString();
-        this.minimumOutput.value = min.toString();
-        this.maximumOutput.value = max.toString();
+        const inputValue = this.codo.getElementsByTagName('input').length;
 
-         
+        for (let i = 0; i < inputValue; i++)
+            {
+                this.numbersArray[i] = +(document.getElementById('form'+i) as HTMLInputElement).value;
+            }
+    }
+
+    showSum()
+    {
+
+        this.codo.addEventListener("input", () => 
+        {
+
+            this.getValues();
+
+            let sum : number = 0;
+
+            for (let i = 0; i < this.numbersArray.length; i++)
+                {
+                    sum += +this.numbersArray[i];
+                }
+
+            this.sumOutput.value = sum.toString();
+        });
+    }
+
+    showAvg()
+    {
+        this.codo.addEventListener("input", () => 
+        {
+            this.getValues();
+
+                let sum : number = 0;
+
+                for (let i = 0; i < this.numbersArray.length; i++)
+                    {
+                        sum += +this.numbersArray[i];
+                    }
+
+                let avg: number = sum/this.numbersArray.length;
+                this.averageOutput.value = avg.toString();
+        });
+    }
+
+    showMin()
+    {
+        
+        this.codo.addEventListener("input", () => 
+        {
+            this.getValues();
+
+            let min = Math.min(...this.numbersArray);
+        
+            this.minimumOutput.value = min.toString();
+        });
+    }
+
+    showMax()
+    {
+        
+        this.codo.addEventListener("input", () => 
+        {
+            this.getValues();
+
+            let max = Math.max(...this.numbersArray);
+        
+            this.maximumOutput.value = max.toString();
+        });
+    }
+
+    addClickButton()
+    {
+        var currencyInputNumbers = this.codo.getElementsByTagName('input');
+
+        var newForm = document.createElement('input');
+        newForm.type = 'number'
+        newForm.id = "form"+(currencyInputNumbers.length)
+        newForm.value = '0';
+        this.codo.appendChild(newForm);
+    }
+
+    deleteClickButton()
+    {
+        var currencyInputNumbers = this.codo.getElementsByTagName('input');
+        var removeElement = document.getElementById("form"+(currencyInputNumbers.length-1));
+        this.codo.removeChild(removeElement);
     }
 }
-const calculateApp1 = new CalculateApp1();
+
+const calculateApp1 = new App1();

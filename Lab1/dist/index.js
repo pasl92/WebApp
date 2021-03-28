@@ -1,45 +1,101 @@
-var CalculateApp1 = /** @class */ (function () {
-    function CalculateApp1() {
-        this.openApplication();
-    }
-    CalculateApp1.prototype.openApplication = function () {
+var App1 = /** @class */ (function () {
+    function App1() {
+        //pobierami div z html
+        this.codo = document.getElementById('container');
+        this.obliczenia = document.getElementById('statsData');
+        this.zmienna = document.getElementById('member');
+        this.addButton = document.getElementById('add');
+        this.deleteButton = document.getElementById('delete');
+        //Tablica inputow do obliczen - tablica
+        this.numbersArray = [];
         this.getInputs();
-        this.watchInputValues();
-    };
-    CalculateApp1.prototype.getInputs = function () {
-        this.userInput1 = document.querySelector('#data1');
-        this.userInput2 = document.querySelector('#data2');
-        this.userInput3 = document.querySelector('#data3');
-        this.userInput4 = document.querySelector('#data4');
+        //Tablica inputow do obliczen
+        this.createInput();
+        this.showSum();
+        this.showAvg();
+        this.showMin();
+        this.showMax();
+    }
+    App1.prototype.getInputs = function () {
         this.sumOutput = document.querySelector('#sum');
         this.averageOutput = document.querySelector('#avg');
         this.minimumOutput = document.querySelector('#min');
         this.maximumOutput = document.querySelector('#max');
     };
-    CalculateApp1.prototype.watchInputValues = function () {
+    App1.prototype.createInput = function () {
         var _this = this;
-        this.userInput1.addEventListener('input', function () { return _this.computeData(); });
-        this.userInput2.addEventListener('input', function () { return _this.computeData(); });
-        this.userInput3.addEventListener('input', function () { return _this.computeData(); });
-        this.userInput4.addEventListener('input', function () { return _this.computeData(); });
+        //obsługa triggerowania inputow
+        this.zmienna.addEventListener("input", function () {
+            //input ile bedzie inputow do obliczen
+            var inputValue = +_this.zmienna.value;
+            _this.codo.innerHTML = '';
+            for (var i = 0; i < inputValue; i++) {
+                var newForm = document.createElement('input');
+                newForm.type = 'number';
+                newForm.id = "form" + i;
+                newForm.value = '0';
+                _this.codo.appendChild(newForm);
+            }
+        });
     };
-    CalculateApp1.prototype.computeData = function () {
-        var value1 = +this.userInput1.value;
-        var value2 = +this.userInput2.value;
-        var value3 = +this.userInput3.value;
-        var value4 = +this.userInput4.value;
-        var sum = value1 + value2 + value3 + value4;
-        var avg = sum / 4;
-        var min = Math.min(value1, value2, value3, value4);
-        var max = Math.max(value1, value2, value3, value4);
-        this.showValues(sum, avg, min, max);
+    App1.prototype.getValues = function () {
+        var inputValue = this.codo.getElementsByTagName('input').length;
+        for (var i = 0; i < inputValue; i++) {
+            this.numbersArray[i] = +document.getElementById('form' + i).value;
+        }
     };
-    CalculateApp1.prototype.showValues = function (sum, avg, min, max) {
-        this.sumOutput.value = sum.toString();
-        this.averageOutput.value = avg.toString();
-        this.minimumOutput.value = min.toString();
-        this.maximumOutput.value = max.toString();
+    App1.prototype.showSum = function () {
+        var _this = this;
+        this.codo.addEventListener("input", function () {
+            _this.getValues();
+            var sum = 0;
+            for (var i = 0; i < _this.numbersArray.length; i++) {
+                sum += +_this.numbersArray[i];
+            }
+            _this.sumOutput.value = sum.toString();
+        });
     };
-    return CalculateApp1;
+    App1.prototype.showAvg = function () {
+        var _this = this;
+        this.codo.addEventListener("input", function () {
+            _this.getValues();
+            var sum = 0;
+            for (var i = 0; i < _this.numbersArray.length; i++) {
+                sum += +_this.numbersArray[i];
+            }
+            var avg = sum / _this.numbersArray.length;
+            _this.averageOutput.value = avg.toString();
+        });
+    };
+    App1.prototype.showMin = function () {
+        var _this = this;
+        this.codo.addEventListener("input", function () {
+            _this.getValues();
+            var min = Math.min.apply(Math, _this.numbersArray);
+            _this.minimumOutput.value = min.toString();
+        });
+    };
+    App1.prototype.showMax = function () {
+        var _this = this;
+        this.codo.addEventListener("input", function () {
+            _this.getValues();
+            var max = Math.max.apply(Math, _this.numbersArray);
+            _this.maximumOutput.value = max.toString();
+        });
+    };
+    App1.prototype.addClickButton = function () {
+        var currencyInputNumbers = this.codo.getElementsByTagName('input');
+        var newForm = document.createElement('input');
+        newForm.type = 'number';
+        newForm.id = "form" + (currencyInputNumbers.length);
+        newForm.value = '0';
+        this.codo.appendChild(newForm);
+    };
+    App1.prototype.deleteClickButton = function () {
+        var currencyInputNumbers = this.codo.getElementsByTagName('input');
+        var removeElement = document.getElementById("form" + (currencyInputNumbers.length - 1));
+        this.codo.removeChild(removeElement);
+    };
+    return App1;
 }());
-var calculateApp1 = new CalculateApp1();
+var calculateApp1 = new App1();

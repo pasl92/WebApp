@@ -13,18 +13,28 @@
 </head>
 
 <body>
-    <div class="input-data">
-        <input type= "text" id="data1">
-        <input type= "text" id="data2">
-        <input type= "text" id="data3">
-        <input type= "text" id="data4">
+    <p>Podaj ilość</p>
+    <input type="text" id="member">
+    <div id="container">
     </div>
-    <div class="stats-data">
-        <input type="text" id="sum">
-        <input type="text" id="avg">
-        <input type="text" id="min">
-        <input type="text" id="max">
-    </div>
-    <script src="dist/index.js"></script>
+
+    <div class="statsData">
+      <p>Suma</p>
+      <input type="text" id="sum" disabled="disabled">
+      <p>Średnia</p>
+      <input type="text" id="avg" disabled="disabled">
+      <p>Min</p>
+      <input type="text" id="min" disabled="disabled">
+      <p>Max</p>
+      <input type="text" id="max" disabled="disabled">
+  </div>
+
+  <div class="buttons">
+    <button type="button" onclick="calculateApp1.addClickButton();" id="add">Dodaj</button>
+    <button type="button" onclick="calculateApp1.deleteClickButton();" id="delete">Usuń</button>
+  </div>
+
+    <script src="index.js"></script>
+
 </body>
 </html>

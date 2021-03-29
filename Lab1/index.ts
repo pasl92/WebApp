@@ -26,6 +26,7 @@ class App1
         this.showAvg();
         this.showMin();
         this.showMax();
+        //document.body.style.visibility = "hidden"
     }
 
     getInputs()
@@ -137,6 +138,7 @@ class App1
         newForm.type = 'number'
         newForm.id = "form"+(currencyInputNumbers.length)
         newForm.value = '0';
+        
         this.codo.appendChild(newForm);
     }
 

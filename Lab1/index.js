@@ -15,6 +15,7 @@ var App1 = /** @class */ (function () {
         this.showAvg();
         this.showMin();
         this.showMax();
+        //document.body.style.visibility = "hidden"
     }
     App1.prototype.getInputs = function () {
         this.sumOutput = document.querySelector('#sum');

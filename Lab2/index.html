@@ -4,15 +4,134 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
     <title>Document</title>
 </head>
 <body>
+    <div id="page">
+        <div id="header">
 
-    <div class="input-data">
+            <div id=leftPlace>
+                <p id="title"><b>WSEI 2021</b></p>
+            </div>
 
+            <div id=displayFrame>
+                <div id=display>
+                    <p>= = = = =   Play/Record   = = = = =</p>
+                    <p># CH1 ## CH2 ## CH3 ## CH4 #</p>
+                    
+                
+                </div>
+            </div>
+
+
+        </div>
+        <div id="content">
+            <div id=padsPlace>
+                <div id=buttons0>
+                    <button id=button00></button>
+                    <button id=button01></button>
+                    <button id=button02></button>
+                    <button id=button03></button>
+                </div>
+                <div id=buttons1>
+                    <button id=button10></button>
+                    <button id=button11></button>
+                    <button id=button12></button>
+                    <button id=button13></button>
+                </div>
+                <div id=buttons2>
+                    <button id=button20></button>
+                    <button id=button21></button>
+                    <button id=button22></button>
+                    <button id=button23></button>
+                </div>
+                <div id=buttons3>
+                    <button id=button30></button>
+                    <button id=button31></button>
+                    <button id=button32></button>
+                    <button id=button33></button>
+                </div>
+            </div>
+
+            <div id=recordPlace>
+                <div id=record>
+                    <button id=record0></button>
+                    <p>CH1</p>
+
+                </div>
+                <div id=record>
+                    <button id=record1></button>
+                    <p>CH2</p>
+
+                </div>
+                <div id=record>
+                    <button id=record2></button>
+                    <p>CH3</p>
+
+                </div>
+                <div id=record>
+                    <button id=record3></button>
+                    <p>CH4</p>
+
+                </div>
+            </div>
+
+
+
+            <div id=playPlace>
+                <div id=channel class="channel">
+                    <button id=play0></button>
+                    <p>CH1</p>
+
+                </div>
+                <div id=channel class="channel">
+                    <button id=play1></button>
+                    <p>CH2</p>
+
+                </div>
+                <div id=channel class="channel">
+                    <button id=play2></button>
+                    <p>CH3</p>
+
+                </div>
+                <div id=channel class="channel">
+                    <button id=play3></button>
+                    <p>CH4</p>
+
+                </div>
+                <div id=controlPanel>
+                        <button id=play >
+                            <p>PLAY</p>
+                        </button>
+                        
+                        <button id=stop >
+                            <P>STOP</P>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </div>
-
-
-    <script src="dist/index.js"></script>
+<audio src="sounds/boom.wav" data-sound="boom"></audio> 
+<audio src="sounds/clap.wav" data-sound="clap"></audio>   
+<audio src="sounds/hihat.wav" data-sound="hihat"></audio>   
+<audio src="sounds/kick.wav" data-sound="kick"></audio>   
+<audio src="sounds/openhat.wav" data-sound="openhat"></audio>   
+<audio src="sounds/ride.wav" data-sound="ride"></audio>   
+<audio src="sounds/sample1.wav" data-sound="sample1"></audio>   
+<audio src="sounds/sample2.wav" data-sound="sample2"></audio>   
+<audio src="sounds/sample3.wav" data-sound="sample3"></audio>   
+<audio src="sounds/sample4.wav" data-sound="sample4"></audio>   
+<audio src="sounds/sample5.wav" data-sound="sample5"></audio>   
+<audio src="sounds/sample6.wav" data-sound="sample6"></audio>
+<audio src="sounds/sample7.wav" data-sound="sample7"></audio>    
+<audio src="sounds/snare.wav" data-sound="snare"></audio>     
+<audio src="sounds/tink.wav" data-sound="tink"></audio>     
+<audio src="sounds/tom.wav" data-sound="tom"></audio>      
+<script src="index.js"></script>
 </body>
 </html>

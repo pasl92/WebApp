@@ -6,6 +6,7 @@ class App1
     zmienna: HTMLInputElement = <HTMLInputElement>document.getElementById('member')
     addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add')
     deleteButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('delete')
+    loader: HTMLDivElement = <HTMLDivElement>document.getElementById('loader')
     sumOutput: HTMLInputElement;
     averageOutput: HTMLInputElement;
     minimumOutput: HTMLInputElement;
@@ -26,7 +27,6 @@ class App1
         this.showAvg();
         this.showMin();
         this.showMax();
-        //document.body.style.visibility = "hidden"
     }
 
     getInputs()
@@ -35,6 +35,21 @@ class App1
         this.averageOutput = document.querySelector('#avg');
         this.minimumOutput = document.querySelector('#min');
         this.maximumOutput = document.querySelector('#max');
+    }
+
+    showLoader()
+    {
+        this.loader.style.visibility;
+    }
+
+    hiddenLoader()
+    {
+        this.loader.style.visibility = "hidden";
+    }
+
+    hiddenDIV()
+    {
+        this.obliczenia.style.visibility = "hidden";
     }
 
     createInput()

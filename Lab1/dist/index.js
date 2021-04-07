@@ -6,6 +6,7 @@ var App1 = /** @class */ (function () {
         this.zmienna = document.getElementById('member');
         this.addButton = document.getElementById('add');
         this.deleteButton = document.getElementById('delete');
+        this.loader = document.getElementById('loader');
         //Tablica inputow do obliczen - tablica
         this.numbersArray = [];
         this.getInputs();
@@ -15,13 +16,21 @@ var App1 = /** @class */ (function () {
         this.showAvg();
         this.showMin();
         this.showMax();
-        //document.body.style.visibility = "hidden"
     }
     App1.prototype.getInputs = function () {
         this.sumOutput = document.querySelector('#sum');
         this.averageOutput = document.querySelector('#avg');
         this.minimumOutput = document.querySelector('#min');
         this.maximumOutput = document.querySelector('#max');
+    };
+    App1.prototype.showLoader = function () {
+        this.loader.style.visibility;
+    };
+    App1.prototype.hiddenLoader = function () {
+        this.loader.style.visibility = "hidden";
+    };
+    App1.prototype.hiddenDIV = function () {
+        this.obliczenia.style.visibility = "hidden";
     };
     App1.prototype.createInput = function () {
         var _this = this;

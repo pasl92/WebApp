@@ -6,7 +6,7 @@ class App1
     zmienna: HTMLInputElement = <HTMLInputElement>document.getElementById('member')
     addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add')
     deleteButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('delete')
-    loader: HTMLDivElement = <HTMLDivElement>document.getElementById('loader')
+    loader: HTMLDivElement = <HTMLDivElement>document.getElementById('loaderContainer')
     sumOutput: HTMLInputElement;
     averageOutput: HTMLInputElement;
     minimumOutput: HTMLInputElement;
@@ -27,6 +27,7 @@ class App1
         this.showAvg();
         this.showMin();
         this.showMax();
+        this.hiddenLoader();
     }
 
     getInputs()
@@ -37,26 +38,23 @@ class App1
         this.maximumOutput = document.querySelector('#max');
     }
 
-    showLoader()
-    {
-        this.loader.style.visibility;
-    }
-
     hiddenLoader()
     {
-        this.loader.style.visibility = "hidden";
+        this.loader.style.visibility ='hidden';
     }
 
-    hiddenDIV()
+    showLoader()
     {
-        this.obliczenia.style.visibility = "hidden";
+        this.loader.style.visibility ='visible';
     }
+
 
     createInput()
     {
         //obsługa triggerowania inputow
         this.zmienna.addEventListener("input", () => 
         {
+            this.showLoader();
             //input ile bedzie inputow do obliczen
             const inputValue : number = +this.zmienna.value;
             this.codo.innerHTML = '';
@@ -80,16 +78,16 @@ class App1
             {
                 this.numbersArray[i] = +(document.getElementById('form'+i) as HTMLInputElement).value;
             }
+
     }
 
     showSum()
     {
-
+        
         this.codo.addEventListener("input", () => 
         {
-
+            this.showLoader();
             this.getValues();
-
             let sum : number = 0;
 
             for (let i = 0; i < this.numbersArray.length; i++)
@@ -98,7 +96,9 @@ class App1
                 }
 
             this.sumOutput.value = sum.toString();
+            this.hiddenLoader();
         });
+        
     }
 
     showAvg()

@@ -6,7 +6,7 @@ var App1 = /** @class */ (function () {
         this.zmienna = document.getElementById('member');
         this.addButton = document.getElementById('add');
         this.deleteButton = document.getElementById('delete');
-        this.loader = document.getElementById('loader');
+        this.loader = document.getElementById('loaderContainer');
         //Tablica inputow do obliczen - tablica
         this.numbersArray = [];
         this.getInputs();
@@ -16,6 +16,7 @@ var App1 = /** @class */ (function () {
         this.showAvg();
         this.showMin();
         this.showMax();
+        this.hiddenLoader();
     }
     App1.prototype.getInputs = function () {
         this.sumOutput = document.querySelector('#sum');
@@ -23,19 +24,17 @@ var App1 = /** @class */ (function () {
         this.minimumOutput = document.querySelector('#min');
         this.maximumOutput = document.querySelector('#max');
     };
-    App1.prototype.showLoader = function () {
-        this.loader.style.visibility;
-    };
     App1.prototype.hiddenLoader = function () {
-        this.loader.style.visibility = "hidden";
+        this.loader.style.visibility = 'hidden';
     };
-    App1.prototype.hiddenDIV = function () {
-        this.obliczenia.style.visibility = "hidden";
+    App1.prototype.showLoader = function () {
+        this.loader.style.visibility = 'visible';
     };
     App1.prototype.createInput = function () {
         var _this = this;
         //obsługa triggerowania inputow
         this.zmienna.addEventListener("input", function () {
+            _this.showLoader();
             //input ile bedzie inputow do obliczen
             var inputValue = +_this.zmienna.value;
             _this.codo.innerHTML = '';
@@ -57,12 +56,14 @@ var App1 = /** @class */ (function () {
     App1.prototype.showSum = function () {
         var _this = this;
         this.codo.addEventListener("input", function () {
+            _this.showLoader();
             _this.getValues();
             var sum = 0;
             for (var i = 0; i < _this.numbersArray.length; i++) {
                 sum += +_this.numbersArray[i];
             }
             _this.sumOutput.value = sum.toString();
+            _this.hiddenLoader();
         });
     };
     App1.prototype.showAvg = function () {

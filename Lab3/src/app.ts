@@ -1,10 +1,13 @@
 export class App {
     opwApiKey = '444cac076196e5700436d363ef5480ee';
+
+    
     constructor() {
-        this.getCityInfo('zakopane')
+        this.getCityName;
     }
+    
     async getCityInfo(city: string) {
-        const weather = await this.getWeather('zakopane');
+        const weather = await this.getWeather(city);
         this.saveData(weather);
     }
     async getWeather(city: string): Promise<any> {
@@ -14,6 +17,7 @@ export class App {
         console.log(weatherData);
         return weatherData;
     }
+    
     saveData(data: any) {
         localStorage.setItem('weatherData', JSON.stringify(data));
     }
@@ -24,5 +28,16 @@ export class App {
         } else {
             return {};
         }
+    }
+
+    getCityName(){
+        var cityName = (<HTMLInputElement>document.getElementById("enterCity")).value;
+        console.log(cityName);
+        return cityName;
+    }
+
+    createCityDiv(cityName: string){
+        let cityDiv: HTMLDivElement = document.createElement("div");
+        cityDiv.style.backgroundColor = "blue";
     }
 }

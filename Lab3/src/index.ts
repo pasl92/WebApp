@@ -7,11 +7,11 @@ let cityDiv: any = " ";
 let city: string = " ";
 let data: any = {};
 
-addButton.addEventListener('click', () => {
+addButton.addEventListener('click', async() =>  {
     city = app.getCityName();
-    data = app.getWeather(city);
-    console.log("dane z getWeather");
-    console.log(data);
+    data =  await app.getWeather(city);
+    //console.log("dane z getWeather");
+    //console.log(data);
     app.saveData(city);
     cityDiv = app.createCityDiv(data);
     citiesContainer.appendChild(cityDiv);

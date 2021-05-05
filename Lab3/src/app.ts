@@ -1,3 +1,5 @@
+import { IForecastData, IWeatherData } from './interface';
+
 export class App {
     opwApiKey = '444cac076196e5700436d363ef5480ee';
 
@@ -11,13 +13,15 @@ export class App {
         this.saveData(weather);
     }
     async getWeather(city: string): Promise<any> {
-        const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}`;
-        const weatherResponse = await fetch(openWeatherUrl);
-        const weatherData = await weatherResponse.json();
-        console.log(weatherData);
-        return weatherData;
+        const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}&units=metric`;
+        const weatherResponse = await fetch(openWeatherUrl)
+            .then(response => response.json())
+            .then(data => console.log(data.name));
+            
+        return weatherResponse;
     }
-    
+
+
     saveData(data: any) {
         localStorage.setItem('weatherData', JSON.stringify(data));
     }
@@ -32,12 +36,28 @@ export class App {
 
     getCityName(){
         var cityName = (<HTMLInputElement>document.getElementById("enterCity")).value;
-        console.log(cityName);
+        //console.log(cityName);
         return cityName;
     }
 
-    createCityDiv(cityName: string){
+    createCityDiv(weatherInfo: IWeatherData){
         let cityDiv: HTMLDivElement = document.createElement("div");
         cityDiv.style.backgroundColor = "blue";
+        cityDiv.textContent = 'Miasto: ' + weatherInfo.name;
+
+        //cityDiv.textContent = (weaterInfo.base).toString();
+        //console.log(weaterInfo);
+        //var weaterObj = JSON.parse(weaterInfo);
+        console.log(weatherInfo.name);
+        //console.log(weaterInfo.main.temp)
+        //console.log(JSON.parse(weaterInfo).main.temp);
+        //console.log(weaterObj);
+        //cityDiv.textContent = cityName;
+        //cityDiv.textContent = weaterInfo.id;
+        cityDiv.innerHTML;
+        
+        return cityDiv;
     }
+
 }
+

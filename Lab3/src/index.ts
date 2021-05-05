@@ -2,13 +2,20 @@ import { App } from './app';
 import './main.scss';
 
 let addButton = <HTMLButtonElement>document.getElementById("addButton")
+let citiesContainer = <HTMLDivElement>document.getElementById("citiesContainer")
+let cityDiv: any = " ";
 let city: string = " ";
+let data: any = {};
 
 addButton.addEventListener('click', () => {
     city = app.getCityName();
-    app.getWeather(city);
+    data = app.getWeather(city);
+    console.log("dane z getWeather");
+    console.log(data);
+    app.saveData(city);
+    cityDiv = app.createCityDiv(data);
+    citiesContainer.appendChild(cityDiv);
 });
-
 
 
 const app = new App();

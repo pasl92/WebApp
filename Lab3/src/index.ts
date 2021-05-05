@@ -10,7 +10,6 @@ let data: any = {};
 addButton.addEventListener('click', async() =>  {
     city = app.getCityName();
     data =  await app.getWeather(city);
-    //console.log("dane z getWeather");
     //console.log(data);
     app.saveData(city);
     cityDiv = app.createCityDiv(data);

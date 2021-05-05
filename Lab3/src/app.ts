@@ -13,8 +13,10 @@ export class App {
         this.saveData(weather);
     }
     async getWeather(city: string): Promise<any> {
-        const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}&units=metric`;
+        const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}&lang=pl&units=metric`;
         const weatherResponse = await fetch(openWeatherUrl)
+            .then(response => response.json())
+            
             
         return weatherResponse;
     }
@@ -38,23 +40,34 @@ export class App {
         return cityName;
     }
 
-    createCityDiv(weatherInfo: IWeatherData){
-        let cityDiv: HTMLDivElement = document.createElement("div");
-        cityDiv.style.backgroundColor = "blue";
-        cityDiv.textContent = 'Miasto: ' + weatherInfo.name;
+    capitalizeFirstLetter(data: string) {
+        return data.charAt(0).toUpperCase() + data.slice(1);
+      }
 
-        //cityDiv.textContent = (weaterInfo.base).toString();
-        //console.log(weaterInfo);
-        //var weaterObj = JSON.parse(weaterInfo);
-        console.log(weatherInfo.name);
-        //console.log(weaterInfo.main.temp)
-        //console.log(JSON.parse(weaterInfo).main.temp);
-        //console.log(weaterObj);
-        //cityDiv.textContent = cityName;
-        //cityDiv.textContent = weaterInfo.id;
-        cityDiv.innerHTML;
-        
-        return cityDiv;
+    createCityDiv(weatherInfo: IWeatherData){
+        let mainDiv: HTMLDivElement = document.createElement("div");
+        mainDiv.className = "mainDiv"
+
+        let cityDiv: HTMLDivElement = document.createElement("div");
+        cityDiv.className = "cityDiv"
+        cityDiv.textContent = weatherInfo.name;
+        mainDiv.appendChild(cityDiv);
+
+        let weatherDiv: HTMLDivElement = document.createElement("div");
+        weatherDiv.className = "weatherDiv"
+        weatherDiv.textContent = this.capitalizeFirstLetter(weatherInfo.weather[0].description);
+        mainDiv.appendChild(weatherDiv);
+
+
+        let temperatureDiv: HTMLDivElement = document.createElement("div");
+        temperatureDiv.className = "tepmeratureDiv";
+        temperatureDiv.textContent = 'Tepmeratura: ' + Math.round(weatherInfo.main.temp) + '°C';
+        mainDiv.appendChild(temperatureDiv);
+
+    
+       
+        mainDiv.innerHTML;
+        return mainDiv;
     }
 
 }

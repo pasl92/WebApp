@@ -3,14 +3,13 @@ import { IForecastData, IWeatherData } from './interface';
 export class App {
     opwApiKey = '444cac076196e5700436d363ef5480ee';
 
-    
+
     constructor() {
         this.getCityName;
     }
     
     async getCityInfo(city: string) {
-        const weather = await this.getWeather(city);
-        this.saveData(weather);
+         await this.getWeather(city);
     }
     async getWeather(city: string): Promise<any> {
         const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}&lang=pl&units=metric`;
@@ -23,12 +22,21 @@ export class App {
 
 
     saveData(data: any) {
-        localStorage.setItem('weatherData', JSON.stringify(data));
+        localStorage.setItem("cityArray", data);
+    ;
     }
-    getData() {
-        const data = localStorage.getItem('weatherData');
-        if (data) {
-            return JSON.parse(data);
+
+    async getData() {
+        let citiesContainer = <HTMLDivElement>document.getElementById("citiesContainer")
+        let data: any = (localStorage.getItem('cityArray')).split(",");
+
+
+        if (data.length != 0) {
+            for (let i=0; i<data.length; i++) {
+                let weatherLoop = await this.getWeather(data[i])
+                let cityDiv = this.createCityDiv(weatherLoop);
+                citiesContainer.appendChild(cityDiv);
+            }
         } else {
             return {};
         }
@@ -36,7 +44,6 @@ export class App {
 
     getCityName(){
         var cityName = (<HTMLInputElement>document.getElementById("enterCity")).value;
-        //console.log(cityName);
         return cityName;
     }
 
@@ -61,11 +68,9 @@ export class App {
 
         let temperatureDiv: HTMLDivElement = document.createElement("div");
         temperatureDiv.className = "tepmeratureDiv";
-        temperatureDiv.textContent = 'Tepmeratura: ' + Math.round(weatherInfo.main.temp) + '°C';
+        temperatureDiv.textContent = 'Temperatura: ' + Math.round(weatherInfo.main.temp) + '°C';
         mainDiv.appendChild(temperatureDiv);
 
-    
-       
         mainDiv.innerHTML;
         return mainDiv;
     }

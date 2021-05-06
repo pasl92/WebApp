@@ -140,7 +140,7 @@ body{
     color: rgba(184,219,244,255);
 }
 
-#recordPlace button{
+#recordPlace input{
     position: relative;
     float: left;
     height: 60%;
@@ -181,7 +181,7 @@ body{
     top: 8%;
 }
 
-#playPlace button{
+#playPlace input{
     position: relative;
     float: left;
     margin: auto;

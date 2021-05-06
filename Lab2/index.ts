@@ -17,18 +17,60 @@ let tomSound: HTMLAudioElement
 
 
 const channel0: any[] = [];
+const channel1: any[] = [];
 const channel2: any[] = [];
 const channel3: any[] = [];
-const channel4: any[] = [];
+
+
+const recordButton0: HTMLInputElement =  document.querySelector('#record0');
+const recordButton1: HTMLInputElement =  document.querySelector('#record1');
+const recordButton2: HTMLInputElement =  document.querySelector('#record2');
+const recordButton3: HTMLInputElement =  document.querySelector('#record3');
+
+const playChannelsButton: HTMLButtonElement = document.querySelector("#play");
+
+  const chceckBoxesChannels: HTMLInputElement[] = [
+    document.querySelector('#play0'),
+    document.querySelector('#play1'),
+    document.querySelector('#play2'),
+    document.querySelector('#play3')
+  ];
+
+
 
 appStart();
-
-
+//pobranie dzwieków i wyłapanie eventu kliku
 function appStart(): void {
     getSounds();
     window.addEventListener('keypress', onKeyDown);
-    const btnPlayChannel0: any = document.querySelector('#play0');
-    btnPlayChannel0.addEventListener('click', onPlayChannel0);
+    playChannelsButton.addEventListener('click', playChcekedChannel);
+    //playChannelsButton.addEventListener('click', recordChannel);
+    recordButton0.addEventListener('click', setCurrentTime);
+}
+
+let startTime = 0;
+
+function setCurrentTime(){
+    startTime = Date.now();
+}
+
+
+
+//graj wybrany kanał?
+function playChcekedChannel()
+{
+    if (chceckBoxesChannels[0].checked) {
+        onPlayChannel0();
+
+       } else if (chceckBoxesChannels[1].checked) {
+        onPlayChannel1();
+
+       } else if (chceckBoxesChannels[2].checked) {
+        onPlayChannel2();
+
+       } else if (chceckBoxesChannels[3].checked) {
+        onPlayChannel3();
+       }
 }
 
 
@@ -54,14 +96,36 @@ function getSounds(): void{
 
 
 function onKeyDown(ev: KeyboardEvent): void {
-    console.log(ev);
-    const key = ev.key;
-    const time = ev.timeStamp;
-    channel0.push({key, time});
-    playSound(key);
-    console.log(channel0);
-
+    recordChannel(ev);
 }
+
+const startRecordTimes: number[] = [];
+
+function recordChannel(ev: KeyboardEvent): void{
+    const key = ev.key;
+    const time =  ev.timeStamp - startTime;
+    playSound(key);
+
+
+    if (recordButton0.checked) {
+        channel0.push({key, time});
+        console.log(channel0);
+        
+       } else if (recordButton1.checked) {
+        channel1.push({key, time});
+        console.log(channel1);
+
+       } else if (recordButton2.checked) {
+        channel2.push({key, time});
+        console.log(channel2);
+
+       } else if (recordButton3.checked) {
+        channel3.push({key, time});
+        console.log(channel3);
+       }
+}
+
+
 
 function onPlayChannel0(): void{
     channel0.forEach(sound => {
@@ -69,70 +133,104 @@ function onPlayChannel0(): void{
     })
 }
 
+function onPlayChannel1(): void{
+    channel1.forEach(sound => {
+        setTimeout(() => playSound(sound.key), sound.time)
+    })
+}
+
+function onPlayChannel2(): void{
+    channel2.forEach(sound => {
+        setTimeout(() => playSound(sound.key), sound.time)
+    })
+}
+
+function onPlayChannel3(): void{
+    channel3.forEach(sound => {
+        setTimeout(() => playSound(sound.key), sound.time)
+    })
+}
+
+
 function playSound(key: string){
 
     switch (key) {
         case '1':
+            boomSound.currentTime = 0;
             boomSound.play();
     }
     switch (key) {
         case '2':
+            clapSound.currentTime = 0;
             clapSound.play();
     }
     switch (key) {
         case '3':
+            hihatSound.currentTime = 0;
             hihatSound.play();
     }
     switch (key) {
         case '4':
+            kickSound.currentTime = 0;
             kickSound.play();
     }
     switch (key) {
         case 'q':
+            openhatSound.currentTime = 0;
             openhatSound.play();
     }
     switch (key) {
         case 'w':
+            rideSound.currentTime = 0;
             rideSound.play();
     }
     switch (key) {
         case 'e':
+            sample1Sound.currentTime = 0;
             sample1Sound.play();
     }
     switch (key) {
         case 'r':
+            sample2Sound.currentTime = 0;
             sample2Sound.play();
     }
     switch (key) {
-        case 'a':
+        case 'a':sample3Sound.currentTime = 0;
             sample3Sound.play();
     }
     switch (key) {
         case 's':
+            sample4Sound.currentTime = 0;
             sample4Sound.play();
     }
     switch (key) {
         case 'd':
+            sample5Sound.currentTime = 0;
             sample5Sound.play();
     }
     switch (key) {
         case 'f':
+            sample6Sound.currentTime = 0;
             sample6Sound.play();
     }
     switch (key) {
         case 'z':
+            sample7Sound.currentTime = 0;
             sample7Sound.play();
     }
     switch (key) {
         case 'x':
+            snareSound.currentTime = 0;
             snareSound.play();
     }
     switch (key) {
         case 'c':
+            tinkSound.currentTime = 0;
             tinkSound.play();
     }
     switch (key) {
         case 'v':
+            tomSound.currentTime = 0;
             tomSound.play();
     }
 }

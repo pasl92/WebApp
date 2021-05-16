@@ -3,14 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pogodynka</title>
+    <title>Fiszki</title>
   </head>
   <body>
       <enterCity id="enterCityContainer">
-        <input type='text' id='enterCity'/>
-        <button id='addButton'>
-          Dodaj miasto
-        </button>
+        <noteContainer id='noteContainer'>
+          <input type='text' placeholder="Wprowadz tytuł" id='enterTitle'/>
+          <input type='text' placeholder="Wprowadz tekst" id='enterText'/>
+          <input type='color'  id='enterColor'/>
+            <button id='addButton'>
+              Dodaj fiszkę
+            </button>
+        </noteContainer>
       </enterCity>
     
     <citiesContainer id='citiesContainer'>

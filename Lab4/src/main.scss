@@ -3,10 +3,20 @@ body {
 }
 
 #enterCityContainer{
+  background-color: bisque;
   display: flex;
   justify-content: center;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin: 5%;
+}
+
+#noteContainer{
+  background-color: lightsalmon;
+  padding: 1%;;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+
 }
 
 #citiesContainer{

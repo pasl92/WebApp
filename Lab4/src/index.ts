@@ -1,6 +1,6 @@
 import { App } from './app';
+import { Note } from './note';
 import './main.scss';
-import { IForecastData, IWeatherData } from './interface';
 
 let addButton = <HTMLButtonElement>document.getElementById("addButton")
 let citiesContainer = <HTMLDivElement>document.getElementById("citiesContainer")
@@ -16,23 +16,16 @@ window.onload = function() {
 
 addButton.addEventListener('click', async() =>  {
     city = app.getCityName();
-
-    if(citiesArray.includes(city) == false)
-    {
         console.log(citiesArray);
-        data =  await app.getWeather(city);
         console.log(data);
         cityDiv = app.createCityDiv(data);
         citiesContainer.appendChild(cityDiv);
         citiesArray.push(data.name)
         app.saveData(citiesArray);
         counterStorage++;
-    }
-    else{
-        return;
-    }
     
 });
 
 
 const app = new App();
+const note = new Note();

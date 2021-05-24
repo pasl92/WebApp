@@ -1,31 +1,44 @@
-import { App } from './app';
 import { Note } from './note';
 import './main.scss';
 
 let addButton = <HTMLButtonElement>document.getElementById("addButton")
-let citiesContainer = <HTMLDivElement>document.getElementById("citiesContainer")
-let cityDiv: any = " ";
-let city: string = " ";
-let data: any = {};
-let counterStorage: number = 0;
-let citiesArray: string[] = [];
+let notesContainer = <HTMLDivElement>document.getElementById("notesContainer")
+
+let noteDiv: any = " ";
+let notesArray: any[] = [];
+
+
 
 window.onload = function() {
-    app.getData();
+
+        let data: any = (localStorage.getItem('notesArray'));
+        let objData = JSON.parse(data)
+        console.log(objData);
+
+        for (let i=0; i<objData.length; i++) {
+                let saveNote = new Note(objData[i].title, objData[i].text, objData[i].color, objData[i].date )
+                let noteDiv = saveNote.createNoteDiv();
+                notesContainer.appendChild(noteDiv);
+            }
 }
 
 addButton.addEventListener('click', async() =>  {
-    city = app.getCityName();
-        console.log(citiesArray);
-        console.log(data);
-        cityDiv = app.createCityDiv(data);
-        citiesContainer.appendChild(cityDiv);
-        citiesArray.push(data.name)
-        app.saveData(citiesArray);
-        counterStorage++;
+
+    var noteTitle: string = (<HTMLInputElement>document.getElementById("enterTitle")).value;
+    var noteText: string = (<HTMLInputElement>document.getElementById("enterText")).value;
+    var noteColor: string = (<HTMLInputElement>document.getElementById("enterColor")).value;
+    var noteDate: number = new Date().getTime();
     
+    const newNote = new Note(noteTitle, noteText, noteColor, noteDate)
+
+        noteDiv = newNote.createNoteDiv();
+        notesContainer.appendChild(noteDiv);
+        notesArray.push(newNote);
+        //console.log(newNote);
+        console.log(notesArray);
+        newNote.saveData(notesArray);
 });
 
 
-const app = new App();
-const note = new Note();
+
+

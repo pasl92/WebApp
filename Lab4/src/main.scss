@@ -1,41 +1,83 @@
 body {
-  background-color: aquamarine;
+  background:#666;
+  color:#fff;
+  font-family: 'Lato';
 }
 
-#enterCityContainer{
-  background-color: bisque;
+#enterNoteContainer{
   display: flex;
   justify-content: center;
-  margin: 5%;
+  margin: 2%;
 }
 
 #noteContainer{
   background-color: lightsalmon;
-  padding: 1%;;
+  color: black;
+  padding: 1%;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 25%;
   justify-content: center;
 
+  #colorAndButtonDiv{
+    
+    padding-top: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    input{
+      height: 40px;
+      width: 80px;
+    }
+  }
+  input{
+    
+    border: none;
+    background-color: transparent;
+    font-size:  1.2rem;
+    line-height: 1.9;
+    outline: transparent;
+  }
 }
 
-#citiesContainer{
+#notesContainer{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.mainDiv{
+.mainNoteDiv{
   margin: 2%;
-  padding: 1%;
   display: flex;
   flex-direction: column;
   -webkit-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.88);
   -moz-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.88);
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.88);
-  background-color: lightgray;
+
+  text-decoration:none;
+  color:#000;
+  display:block;
+  height:10em;
+  width:10em;
+  padding:1em;
 }
 
-.cityDiv{
+.noteDiv{
   justify-content: center;
+}
+
+.noteTitleDiv{
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.textDiv{
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 2%;;
+}
+
+.deleteDiv{
+  position: relative;
+  font-weight: 600;
 }

@@ -6,20 +6,23 @@
     <title>Fiszki</title>
   </head>
   <body>
-      <enterCity id="enterCityContainer">
+      <enterNote id="enterNoteContainer">
         <noteContainer id='noteContainer'>
-          <input type='text' placeholder="Wprowadz tytuł" id='enterTitle'/>
-          <input type='text' placeholder="Wprowadz tekst" id='enterText'/>
-          <input type='color'  id='enterColor'/>
-            <button id='addButton'>
-              Dodaj fiszkę
-            </button>
+          <h1>Stwórz nową fiszkę!</h1>
+            <input type='text' placeholder="Wprowadz tytuł..." id='enterTitle'/>
+            <input type='text' placeholder="Wprowadz tekst..." id='enterText'/>
+              <colorAndButtonDiv id='colorAndButtonDiv'>
+                <input type='color'   id='enterColor'/>
+                  <button id='addButton'>
+                    Dodaj fiszkę
+                  </button>
+              </colorAndButtonDiv>
         </noteContainer>
-      </enterCity>
+      </enterNote>
     
-    <citiesContainer id='citiesContainer'>
+    <notesContainer id='notesContainer'>
 
-    </citiesContainer>
+    </notesContainer>
     <script src="index.js"></script>
   </body>
 </html>

@@ -1,62 +1,72 @@
 export class Note {
+   
+    title: string;
+    text: string;
+    color: string;
+    date: number;
 
-    constructor() {
-        this.getNoteData;
+    constructor(title: string, text: string, color: string, date: number) {
+
+
+        this.title = title;
+        this.text = text;
+        this.color = color;
+        this.date = date;
+    }
+
+
+    saveData(data: any) {
+        localStorage.setItem("notesArray", JSON.stringify(data));
     }
     
 
-    saveData(data: any) {
-        localStorage.setItem("notesArray", data);
-    }
+    getData() {
+        let notesContainer = <HTMLDivElement>document.getElementById("notesContainer")
+        let data: any = (localStorage.getItem('notesArray'));
 
-    async getData() {
-        let citiesContainer = <HTMLDivElement>document.getElementById("citiesContainer")
-        let data: any = (localStorage.getItem('cityArray')).split(",");
-
-
-        if (data.length != 0) {
-            for (let i=0; i<data.length; i++) {
-                // let weatherLoop = await this.getWeather(data[i])
-                // let cityDiv = this.createCityDiv(weatherLoop);
-                // citiesContainer.appendChild(cityDiv);
+        for (let i=0; i<data.length; i++) {
+                let noteDiv = this.createNoteDiv();
+                notesContainer.appendChild(noteDiv);
             }
-        } else {
-            return {};
-        }
     }
 
-    getNoteData(){
-        var noteTitle = (<HTMLInputElement>document.getElementById("enterTitle")).value;
-        var noteTitle = (<HTMLInputElement>document.getElementById("enterTitle")).value;
-        return noteTitle;
-    }
 
-    capitalizeFirstLetter(data: string) {
-        return data.charAt(0).toUpperCase() + data.slice(1);
-      }
 
-    createCityDiv(){
+    createNoteDiv(){
+        
         let mainDiv: HTMLDivElement = document.createElement("div");
-        mainDiv.className = "mainDiv"
+        mainDiv.className = "mainNoteDiv"
+        mainDiv.style.backgroundColor = this.color;
 
-        let cityDiv: HTMLDivElement = document.createElement("div");
-        cityDiv.className = "cityDiv"
-        cityDiv.textContent = "uzupelnij";
-        mainDiv.appendChild(cityDiv);
+        let titleDiv: HTMLDivElement = document.createElement("div");
+        titleDiv.className = "noteTitleDiv"
+        titleDiv.textContent = this.title;
+        mainDiv.appendChild(titleDiv);
 
-        let weatherDiv: HTMLDivElement = document.createElement("div");
-        weatherDiv.className = "weatherDiv"
-        weatherDiv.textContent = this.capitalizeFirstLetter("uzupelnij");
-        mainDiv.appendChild(weatherDiv);
+        let textDiv: HTMLDivElement = document.createElement("div");
+        textDiv.className = "textDiv"
+        textDiv.textContent = this.text;
+        mainDiv.appendChild(textDiv);
+
+        let dateDiv: HTMLDivElement = document.createElement("div");
+        dateDiv.className = "dateDiv"
+        dateDiv.style.color = "lightgray"
+        dateDiv.textContent = (new Date(this.date)).toLocaleDateString();
+        mainDiv.appendChild(dateDiv);
 
 
-        let temperatureDiv: HTMLDivElement = document.createElement("div");
-        temperatureDiv.className = "tepmeratureDiv";
-        temperatureDiv.textContent = 'Temperatura: ' + Math.round(6666) + '°C';
-        mainDiv.appendChild(temperatureDiv);
+        let deleteButton: HTMLButtonElement = document.createElement("button");
+        deleteButton.onclick = function (){
+            mainDiv.remove();
+        };
+        deleteButton.className = "deleteDiv"
+        deleteButton.textContent = "x";
+        mainDiv.appendChild(deleteButton);
 
         mainDiv.innerHTML;
         return mainDiv;
+        
     }
-
 }
+
+

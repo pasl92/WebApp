@@ -38,6 +38,14 @@ export class Note {
         mainDiv.className = "mainNoteDiv"
         mainDiv.style.backgroundColor = this.color;
 
+        let deleteButton: HTMLButtonElement = document.createElement("button");
+        deleteButton.onclick = function (){
+            mainDiv.remove();
+        };
+        deleteButton.className = "deleteDiv"
+        deleteButton.textContent = "x";
+        mainDiv.appendChild(deleteButton);
+
         let titleDiv: HTMLDivElement = document.createElement("div");
         titleDiv.className = "noteTitleDiv"
         titleDiv.textContent = this.title;
@@ -55,13 +63,7 @@ export class Note {
         mainDiv.appendChild(dateDiv);
 
 
-        let deleteButton: HTMLButtonElement = document.createElement("button");
-        deleteButton.onclick = function (){
-            mainDiv.remove();
-        };
-        deleteButton.className = "deleteDiv"
-        deleteButton.textContent = "x";
-        mainDiv.appendChild(deleteButton);
+        
 
         mainDiv.innerHTML;
         return mainDiv;

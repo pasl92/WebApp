@@ -18,6 +18,7 @@ var channel0 = [];
 var channel1 = [];
 var channel2 = [];
 var channel3 = [];
+var recordPlace = document.querySelector('#recordPlace');
 var recordButton0 = document.querySelector('#record0');
 var recordButton1 = document.querySelector('#record1');
 var recordButton2 = document.querySelector('#record2');
@@ -33,10 +34,11 @@ appStart();
 //pobranie dzwieków i wyłapanie eventu kliku
 function appStart() {
     getSounds();
+    recordPlace.addEventListener('click', saveClickRecordButtonChannelTime);
     window.addEventListener('keypress', onKeyDown);
     playChannelsButton.addEventListener('click', playChcekedChannel);
-    //playChannelsButton.addEventListener('click', recordChannel);
     recordButton0.addEventListener('click', setCurrentTime);
+    setCurrentTime();
 }
 var startTime = 0;
 function setCurrentTime() {
@@ -78,10 +80,16 @@ function getSounds() {
 function onKeyDown(ev) {
     recordChannel(ev);
 }
-var startRecordTimes = [];
+function clickRecordButtonChannel(ev) {
+    saveClickRecordButtonChannelTime(ev);
+}
+var startRecordingTime = 0;
+function saveClickRecordButtonChannelTime(ev) {
+    startRecordingTime = ev.timeStamp;
+}
 function recordChannel(ev) {
     var key = ev.key;
-    var time = ev.timeStamp - startTime;
+    var time = ev.timeStamp - startRecordingTime;
     playSound(key);
     if (recordButton0.checked) {
         channel0.push({ key: key, time: time });

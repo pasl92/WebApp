@@ -21,7 +21,7 @@ const channel1: any[] = [];
 const channel2: any[] = [];
 const channel3: any[] = [];
 
-
+const recordPlace: HTMLDivElement =  document.querySelector('#recordPlace');
 const recordButton0: HTMLInputElement =  document.querySelector('#record0');
 const recordButton1: HTMLInputElement =  document.querySelector('#record1');
 const recordButton2: HTMLInputElement =  document.querySelector('#record2');
@@ -42,10 +42,11 @@ appStart();
 //pobranie dzwieków i wyłapanie eventu kliku
 function appStart(): void {
     getSounds();
+    recordPlace.addEventListener('click', saveClickRecordButtonChannelTime);
     window.addEventListener('keypress', onKeyDown);
     playChannelsButton.addEventListener('click', playChcekedChannel);
-    //playChannelsButton.addEventListener('click', recordChannel);
     recordButton0.addEventListener('click', setCurrentTime);
+    setCurrentTime();
 }
 
 let startTime = 0;
@@ -53,7 +54,6 @@ let startTime = 0;
 function setCurrentTime(){
     startTime = Date.now();
 }
-
 
 
 //graj wybrany kanał?
@@ -99,11 +99,20 @@ function onKeyDown(ev: KeyboardEvent): void {
     recordChannel(ev);
 }
 
-const startRecordTimes: number[] = [];
+function clickRecordButtonChannel(ev: MouseEvent): void {
+    saveClickRecordButtonChannelTime(ev);
+}
+
+let startRecordingTime = 0;
+
+function saveClickRecordButtonChannelTime(ev: MouseEvent): void {
+    startRecordingTime = ev.timeStamp;
+}
 
 function recordChannel(ev: KeyboardEvent): void{
+    
     const key = ev.key;
-    const time =  ev.timeStamp - startTime;
+    const time = ev.timeStamp - startRecordingTime;
     playSound(key);
 
 

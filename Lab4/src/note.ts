@@ -4,14 +4,16 @@ export class Note {
     text: string;
     color: string;
     date: number;
+    pinned: boolean;
 
-    constructor(title: string, text: string, color: string, date: number) {
+    constructor(title: string, text: string, color: string, date: number, pinned: boolean) {
 
 
         this.title = title;
         this.text = text;
         this.color = color;
         this.date = date;
+        this.pinned = pinned;
     }
 
 
@@ -62,8 +64,6 @@ export class Note {
         dateDiv.textContent = (new Date(this.date)).toLocaleDateString();
         mainDiv.appendChild(dateDiv);
 
-
-        
 
         mainDiv.innerHTML;
         return mainDiv;

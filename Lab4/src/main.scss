@@ -2,16 +2,18 @@ body {
   background:#666;
   color:#fff;
   font-family: 'Lato';
+  margin-bottom: 3%;;
 }
 
 #enterNoteContainer{
   display: flex;
   justify-content: center;
   margin: 2%;
+  margin-bottom: 0;
 }
 
 #noteContainer{
-  background-color: lightsalmon;
+  background-color: lightyellow;
   color: black;
   padding: 1%;
   padding-top: 0;
@@ -19,15 +21,15 @@ body {
   flex-direction: column;
   width: 25%;
   justify-content: center;
+  
 
   #colorAndButtonDiv{
-    
-    padding-top: 5%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    margin-top: 6%;
     input{
       height: 40px;
-      width: 80px;
+      width: 40px;
     }
   }
   input{
@@ -42,8 +44,31 @@ body {
 
 #notesContainer{
   display: flex;
+  flex-direction: column;
+}
+
+#notesContainerPinned{
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  border-style: inset;
+  border-color: lightgreen;
+}
+
+#notesContainerUnPinned{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-style: outset;
+  border-color: lightcoral;
+}
+
+#textInfo{
+  margin: 1%;
+  margin-left: 2%;
+  font-size:x-large;
+  font-weight: bold;
+  color: #000;
 }
 
 .mainNoteDiv{
@@ -64,6 +89,7 @@ body {
 
 .noteDiv{
   justify-content: center;
+  display: flex;
 }
 
 .noteTitleDiv{
@@ -78,6 +104,7 @@ body {
 }
 
 .deleteDiv{
-  position: relative;
+  position: static;
   font-weight: 600;
+  left: 20px;
 }

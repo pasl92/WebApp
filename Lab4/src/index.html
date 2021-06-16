@@ -12,6 +12,7 @@
             <input type='text' placeholder="Wprowadz tytuł..." id='enterTitle'/>
             <input type='text' placeholder="Wprowadz tekst..." id='enterText'/>
               <colorAndButtonDiv id='colorAndButtonDiv'>
+                <input type='checkbox'   id='pinnedNote'/>
                 <input type='color'   id='enterColor'/>
                   <button id='addButton'>
                     Dodaj fiszkę
@@ -21,6 +22,16 @@
       </enterNote>
     
     <notesContainer id='notesContainer'>
+
+      <p id='textInfo'>Przypięte fiszki</p>
+
+      <notesContainerPinned id='notesContainerPinned'>
+          
+      </notesContainerPinned>
+        <p id='textInfo'>Nieprzypięte fiszki</p>
+        <notesContainerUnPinned id='notesContainerUnPinned'>
+          
+        </notesContainerUnPinned>
 
     </notesContainer>
     <script src="index.js"></script>

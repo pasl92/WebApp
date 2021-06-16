@@ -38,14 +38,17 @@ export class Note {
         
         let mainDiv: HTMLDivElement = document.createElement("div");
         mainDiv.className = "mainNoteDiv"
-        mainDiv.style.backgroundColor = this.color;
+        mainDiv.style.borderStyle = "solid";
+        mainDiv.style.borderColor = this.color;
+        mainDiv.style.background = "grey"
 
         let deleteButton: HTMLButtonElement = document.createElement("button");
+        deleteButton.className = "deleteButton"
         deleteButton.onclick = function (){
             mainDiv.remove();
         };
         deleteButton.className = "deleteDiv"
-        deleteButton.textContent = "x";
+        deleteButton.textContent = "X";
         mainDiv.appendChild(deleteButton);
 
         let titleDiv: HTMLDivElement = document.createElement("div");

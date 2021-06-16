@@ -49,13 +49,13 @@ function playChcekedChannel() {
     if (chceckBoxesChannels[0].checked) {
         onPlayChannel0();
     }
-    else if (chceckBoxesChannels[1].checked) {
+    if (chceckBoxesChannels[1].checked) {
         onPlayChannel1();
     }
-    else if (chceckBoxesChannels[2].checked) {
+    if (chceckBoxesChannels[2].checked) {
         onPlayChannel2();
     }
-    else if (chceckBoxesChannels[3].checked) {
+    if (chceckBoxesChannels[3].checked) {
         onPlayChannel3();
     }
 }

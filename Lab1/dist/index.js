@@ -29,12 +29,14 @@ var App1 = /** @class */ (function () {
     };
     App1.prototype.showLoader = function () {
         this.loader.style.visibility = 'visible';
+        4;
     };
     App1.prototype.createInput = function () {
         var _this = this;
         //obsługa triggerowania inputow
         this.zmienna.addEventListener("input", function () {
             _this.showLoader();
+            _this.numbersArray = [];
             //input ile bedzie inputow do obliczen
             var inputValue = +_this.zmienna.value;
             _this.codo.innerHTML = '';
@@ -58,7 +60,7 @@ var App1 = /** @class */ (function () {
         this.codo.addEventListener("input", function () {
             _this.showLoader();
             _this.getValues();
-            var sum = 0;
+            var sum = 1;
             for (var i = 0; i < _this.numbersArray.length; i++) {
                 sum += +_this.numbersArray[i];
             }

@@ -45,7 +45,7 @@ class App1
 
     showLoader()
     {
-        this.loader.style.visibility ='visible';
+        this.loader.style.visibility ='visible';4
     }
 
 
@@ -55,6 +55,7 @@ class App1
         this.zmienna.addEventListener("input", () => 
         {
             this.showLoader();
+            this.numbersArray = [];
             //input ile bedzie inputow do obliczen
             const inputValue : number = +this.zmienna.value;
             this.codo.innerHTML = '';
@@ -88,7 +89,7 @@ class App1
         {
             this.showLoader();
             this.getValues();
-            let sum : number = 0;
+            let sum : number = 1;
 
             for (let i = 0; i < this.numbersArray.length; i++)
                 {

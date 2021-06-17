@@ -1,3 +1,6 @@
+import firebase from 'firebase';
+import { firebaseConfig } from  './config';
+
 export class Note {
    
     title: string;
@@ -16,11 +19,10 @@ export class Note {
         this.pinned = pinned;
     }
 
-
     saveData(data: any) {
         localStorage.setItem("notesArray", JSON.stringify(data));
     }
-    
+
 
     getData() {
         let notesContainer = <HTMLDivElement>document.getElementById("notesContainer")
@@ -31,8 +33,6 @@ export class Note {
                 notesContainer.appendChild(noteDiv);
             }
     }
-
-
 
     createNoteDiv(){
         

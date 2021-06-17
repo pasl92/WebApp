@@ -3,6 +3,7 @@ import './main.scss';
 import firebase from 'firebase';
 import { firebaseConfig } from  './config';
 
+
 let addButton = <HTMLButtonElement>document.getElementById("addButton")
 let notesContainer = <HTMLDivElement>document.getElementById("notesContainer")
 let notesContainerPinned = <HTMLDivElement>document.getElementById("notesContainerPinned")
@@ -13,15 +14,23 @@ let notesArray: any[] = [];
 
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const db = firebaseApp.firestore();
 
+async function addNoteToFirebase(note: any) {
+    const res = await db.collection('notes').add(note)
+    console.log(res);
+}
+
+const noteTest = {
+    title: "czy zadziała",
+    content: "czy moze nie"
+}
 
 
 window.onload = function() {
 
-        let data: any = (localStorage.getItem('notesArray'));
+        let data: string = (localStorage.getItem('notesArray'));
         let objData = JSON.parse(data)
-        console.log(objData);
 
         for (let i=0; i<objData.length; i++) {
                 let saveNote = new Note(objData[i].title, objData[i].text, objData[i].color, objData[i].date, objData[i].pinned )
@@ -35,6 +44,7 @@ window.onload = function() {
             }
 }
 
+
 addButton.addEventListener('click', async() =>  {
 
     var noteTitle: string = (<HTMLInputElement>document.getElementById("enterTitle")).value;
@@ -43,18 +53,28 @@ addButton.addEventListener('click', async() =>  {
     var noteDate: number = new Date().getTime();
     var isPinned: boolean = (<HTMLInputElement>document.getElementById("pinnedNote")).checked;
     
-    const newNote = new Note(noteTitle, noteText, noteColor, noteDate, isPinned)
+    let newNote = new Note(noteTitle, noteText, noteColor, noteDate, isPinned);
 
-        noteDiv = newNote.createNoteDiv();
-        if (isPinned == true){
-            notesContainerPinned.appendChild(noteDiv);
-        }
-        else{
-            notesContainerUnPinned.appendChild(noteDiv);
-        }
+    let testowyObj = {
+        title: newNote.title,
+        text: newNote.text,
+        color: newNote.color,
+        date: newNote.date,
+        pinned: newNote.pinned
+    };
 
-        notesArray.push(newNote);
-        //console.log(newNote);
-        console.log(notesArray);
-        newNote.saveData(notesArray);
+    noteDiv = newNote.createNoteDiv();
+    if (isPinned == true){
+        notesContainerPinned.appendChild(noteDiv);
+    }
+    else{
+        notesContainerUnPinned.appendChild(noteDiv);
+    }
+
+    //notesArray.push(newNote);
+    //console.log(newNote);
+    //console.log(notesArray);
+    console.log(testowyObj);
+    addNoteToFirebase(testowyObj);
+    //newNote.saveData(notesArray);
 });

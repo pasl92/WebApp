@@ -8,14 +8,14 @@
   <body>
       <enterNote id="enterNoteContainer">
         <noteContainer id='noteContainer'>
-          <h1>Stwórz nową fiszkę!</h1>
-            <input type='text' placeholder="Wprowadz tytuł..." id='enterTitle'/>
-            <input type='text' placeholder="Wprowadz tekst..." id='enterText'/>
+          <h1>Stwórz nową fiszkę !</h1>
+            <input type='text' placeholder="Wprowadz tytuł..." id='enterTitle' maxlength="10"/>
+            <input type='text' placeholder="Wprowadz tekst..." id='enterText' maxlength="15"/>
               <colorAndButtonDiv id='colorAndButtonDiv'>
                 <input type='checkbox'   id='pinnedNote'/>
                 <input type='color'   id='enterColor'/>
                   <button id='addButton'>
-                    Dodaj fiszkę
+                    +
                   </button>
               </colorAndButtonDiv>
         </noteContainer>

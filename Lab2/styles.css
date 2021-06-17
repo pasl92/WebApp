@@ -126,7 +126,7 @@ body{
 #recordPlace div{
     position: relative;
     float: left;
-    left: 4%;
+    left: 1%;
     top: 15%;
     height: 40%;
     width: 24%;
@@ -135,7 +135,8 @@ body{
 #recordPlace P{
     position: relative;
     float: left;
-    left: 10%;
+    margin-top: 15%;
+    left: 22%;
     font-size: 10px;
     color: rgba(184,219,244,255);
 }

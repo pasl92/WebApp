@@ -1,7 +1,7 @@
 import { Note } from './note';
 import './main.scss';
-import firebase from 'firebase';
-import { firebaseConfig } from  './config';
+import { AppFirestoreStorage } from './AppFirestoreStorage';
+import { configSaveNote } from  './configSaveNotes';
 
 
 let addButton = <HTMLButtonElement>document.getElementById("addButton")
@@ -11,24 +11,15 @@ let notesContainerUnPinned = <HTMLDivElement>document.getElementById("notesConta
 
 let noteDiv: any = " ";
 let notesArray: any[] = [];
+let newAppFirestoreStorage = new AppFirestoreStorage();
 
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-
-async function addNoteToFirebase(note: any) {
-    const res = await db.collection('notes').add(note)
-    console.log(res);
-}
-
-const noteTest = {
-    title: "czy zadziała",
-    content: "czy moze nie"
-}
 
 
-window.onload = function() {
+window.onload = async function() {
 
+    if(configSaveNote == "localStorage")
+    {
         let data: string = (localStorage.getItem('notesArray'));
         let objData = JSON.parse(data)
 
@@ -42,6 +33,23 @@ window.onload = function() {
                     notesContainerUnPinned.appendChild(noteDiv);
                 }
             }
+    }
+    else if(configSaveNote == "firebase"){
+
+        let objData: any = await newAppFirestoreStorage.getFromStorage();
+        console.log(objData);
+
+        for (let i=0; i<objData.length; i++) {
+                let saveNote = new Note(objData[i].title, objData[i].text, objData[i].color, objData[i].date, objData[i].pinned )
+                let noteDiv = saveNote.createNoteDiv();
+                if (saveNote.pinned == true){
+                    notesContainerPinned.appendChild(noteDiv);
+                }
+                else{
+                    notesContainerUnPinned.appendChild(noteDiv);
+                }
+            }
+    }
 }
 
 
@@ -54,6 +62,7 @@ addButton.addEventListener('click', async() =>  {
     var isPinned: boolean = (<HTMLInputElement>document.getElementById("pinnedNote")).checked;
     
     let newNote = new Note(noteTitle, noteText, noteColor, noteDate, isPinned);
+    
 
     let testowyObj = {
         title: newNote.title,
@@ -64,6 +73,7 @@ addButton.addEventListener('click', async() =>  {
     };
 
     noteDiv = newNote.createNoteDiv();
+
     if (isPinned == true){
         notesContainerPinned.appendChild(noteDiv);
     }
@@ -71,10 +81,12 @@ addButton.addEventListener('click', async() =>  {
         notesContainerUnPinned.appendChild(noteDiv);
     }
 
-    //notesArray.push(newNote);
-    //console.log(newNote);
-    //console.log(notesArray);
-    console.log(testowyObj);
-    addNoteToFirebase(testowyObj);
-    //newNote.saveData(notesArray);
+
+    if(configSaveNote == "localStorage"){
+        notesArray.push(newNote);
+        newNote.saveData(notesArray);
+    }
+    else if(configSaveNote == "firebase"){
+        newAppFirestoreStorage.addNoteToFirebase(testowyObj);
+    }
 });

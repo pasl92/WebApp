@@ -5,12 +5,12 @@ import { configSaveNote } from  './configSaveNotes';
 
 
 let addButton = <HTMLButtonElement>document.getElementById("addButton")
-let notesContainer = <HTMLDivElement>document.getElementById("notesContainer")
+let deleteButton = <HTMLButtonElement>document.getElementById("deletediv")
 let notesContainerPinned = <HTMLDivElement>document.getElementById("notesContainerPinned")
 let notesContainerUnPinned = <HTMLDivElement>document.getElementById("notesContainerUnPinned")
 
 let noteDiv: any = " ";
-let notesArray: any[] = [];
+export let notesArray: Array<Note> = [];
 let newAppFirestoreStorage = new AppFirestoreStorage();
 
 
@@ -20,12 +20,15 @@ window.onload = async function() {
 
     if(configSaveNote == "localStorage")
     {
+        console.log(notesArray);
         let data: string = (localStorage.getItem('notesArray'));
         let objData = JSON.parse(data)
 
         for (let i=0; i<objData.length; i++) {
-                let saveNote = new Note(objData[i].title, objData[i].text, objData[i].color, objData[i].date, objData[i].pinned )
+                let saveNote = new Note(objData[i].id, objData[i].title, objData[i].text, objData[i].color, objData[i].date, objData[i].pinned )
                 let noteDiv = saveNote.createNoteDiv();
+                notesArray.push(saveNote)
+                console.log(notesArray);
                 if (saveNote.pinned == true){
                     notesContainerPinned.appendChild(noteDiv);
                 }
@@ -40,7 +43,7 @@ window.onload = async function() {
         console.log(objData);
 
         for (let i=0; i<objData.length; i++) {
-                let saveNote = new Note(objData[i].title, objData[i].text, objData[i].color, objData[i].date, objData[i].pinned )
+                let saveNote = new Note(objData[i].id, objData[i].title, objData[i].text, objData[i].color, objData[i].date, objData[i].pinned )
                 let noteDiv = saveNote.createNoteDiv();
                 if (saveNote.pinned == true){
                     notesContainerPinned.appendChild(noteDiv);
@@ -53,6 +56,12 @@ window.onload = async function() {
 }
 
 
+
+//deleteButton.addEventListener('click', async() =>  {
+ //   notesArray.slice(Note.id, 1);
+//console.log("Czy cos tu widac?");
+//});
+
 addButton.addEventListener('click', async() =>  {
 
     var noteTitle: string = (<HTMLInputElement>document.getElementById("enterTitle")).value;
@@ -61,9 +70,8 @@ addButton.addEventListener('click', async() =>  {
     var noteDate: number = new Date().getTime();
     var isPinned: boolean = (<HTMLInputElement>document.getElementById("pinnedNote")).checked;
     
-    let newNote = new Note(noteTitle, noteText, noteColor, noteDate, isPinned);
-    
-
+    let newNote = new Note(0 , noteTitle, noteText, noteColor, noteDate, isPinned);
+  
     let testowyObj = {
         title: newNote.title,
         text: newNote.text,
@@ -73,6 +81,8 @@ addButton.addEventListener('click', async() =>  {
     };
 
     noteDiv = newNote.createNoteDiv();
+
+    
 
     if (isPinned == true){
         notesContainerPinned.appendChild(noteDiv);

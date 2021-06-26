@@ -1,15 +1,18 @@
+import {notesArray} from './index'
 
 export class Note {
-   
+
+    static id: number = -1;
+    id: number;
     title: string;
     text: string;
     color: string;
     date: number;
     pinned: boolean;
 
-    constructor(title: string, text: string, color: string, date: number, pinned: boolean) {
+    constructor(id: number, title: string, text: string, color: string, date: number, pinned: boolean) {
 
-
+        this.id = ++Note.id;
         this.title = title;
         this.text = text;
         this.color = color;
@@ -32,6 +35,8 @@ export class Note {
             }
     }
 
+
+
     createNoteDiv(){
         
         let mainDiv: HTMLDivElement = document.createElement("div");
@@ -44,6 +49,8 @@ export class Note {
         deleteButton.className = "deleteButton"
         deleteButton.onclick = function (){
             mainDiv.remove();
+            notesArray.splice(Note.id, 1);
+            localStorage.setItem("notesArray", JSON.stringify(notesArray));
         };
         deleteButton.className = "deleteDiv"
         deleteButton.textContent = "X";
@@ -71,5 +78,4 @@ export class Note {
         
     }
 }
-
 

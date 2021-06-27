@@ -45,7 +45,7 @@ class App1
 
     showLoader()
     {
-        this.loader.style.visibility ='visible';4
+        this.loader.style.visibility ='visible';
     }
 
 
@@ -89,7 +89,7 @@ class App1
         {
             this.showLoader();
             this.getValues();
-            let sum : number = 1;
+            let sum : number = 0;
 
             for (let i = 0; i < this.numbersArray.length; i++)
                 {

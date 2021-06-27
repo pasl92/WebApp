@@ -35,6 +35,7 @@ var App1 = /** @class */ (function () {
         //obsługa triggerowania inputow
         this.zmienna.addEventListener("input", function () {
             _this.showLoader();
+            _this.numbersArray = [];
             //input ile bedzie inputow do obliczen
             var inputValue = +_this.zmienna.value;
             _this.codo.innerHTML = '';

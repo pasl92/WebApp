@@ -29,7 +29,6 @@ var App1 = /** @class */ (function () {
     };
     App1.prototype.showLoader = function () {
         this.loader.style.visibility = 'visible';
-        4;
     };
     App1.prototype.createInput = function () {
         var _this = this;
@@ -60,7 +59,7 @@ var App1 = /** @class */ (function () {
         this.codo.addEventListener("input", function () {
             _this.showLoader();
             _this.getValues();
-            var sum = 1;
+            var sum = 0;
             for (var i = 0; i < _this.numbersArray.length; i++) {
                 sum += +_this.numbersArray[i];
             }
